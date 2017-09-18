@@ -32,14 +32,14 @@ export default class ParentComponent extends Component {
     this.setState({whatToSay: this.state.whatToSay, whatWasSaid: this.state.whatToSay});
     //clear our input by resetting state
     this.setState({whatToSay: ""});
-
+    document.getElementById("messageCard").classList.remove("hide");
   }
   render() {
       // Smart Component: I have a function, but something isn't working? I also need to pass that function to the ChildComponent.
     return (
       <div className="col-3 mx-auto">
         <div className="form-group text-left">
-          <label for="sayWhat">What do you have to say?</label>
+          <label htmlFor="sayWhat">What do you have to say?</label>
           <input className="form-control" id="sayWhat" aria-describedby="sayWhatHelp" onChange={this.handleInput} type="text" placeholder="Say It, Don't Spray It!" />
           <small id="sayWhatHelp" className="form-text text-muted">We want to hear from you</small>
         </div>

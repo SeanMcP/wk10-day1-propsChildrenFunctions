@@ -1,1 +1,6 @@
-
+.hide {
+  opacity: 0;
+}
+#messageCard {
+  transition: opacity 0.2s ease-in-out;
+}

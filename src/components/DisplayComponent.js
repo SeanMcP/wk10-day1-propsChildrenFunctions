@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class DisplayComponent extends Component {
   render() {
     return (
-      <div className="card">
+      <div id="messageCard" className="card hide">
         <div className="card-header">
           Message
         </div>
