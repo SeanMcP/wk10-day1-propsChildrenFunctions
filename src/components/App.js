@@ -5,7 +5,7 @@ import '../styles/App.css';
 class Header extends Component {
   render() {
     return (
-      <nav>I am the Navigation Bar</nav>
+      <nav>Navigation</nav>
     );
   }
 }
@@ -13,15 +13,20 @@ class Header extends Component {
 class Footer extends Component {
   render() {
     return (
-      <footer>I am the Footer</footer>
+      <footer>&copy; Navigation 2017</footer>
     );
   }
 }
 
 class BaseLayout extends Component {
   render() {
+    // This should house Header and Footer components and be able to house any children components.
     return (
-      <div>This should house Header and Footer components and be able to house any children components.</div>
+      <div>
+        <Header />
+        {this.props.children}
+        <Footer />
+      </div>
     );
   }
 }
@@ -32,6 +37,8 @@ class ParentComponent extends Component {
 
     //we are really in a *bind* here.... :)
     //fix it...
+    this.handleInput = this.handleInput.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
 
     //state lives here
     this.state = {
@@ -42,7 +49,8 @@ class ParentComponent extends Component {
   handleInput(e) {
     e.preventDefault();
     //set the state on input change
-    this.setState({whatToSay: this.state.whatToSay});
+    this.setState({whatToSay: e.target.value})
+    // this.setState({whatToSay: this.state.whatToSay});
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -55,14 +63,15 @@ class ParentComponent extends Component {
 
   }
   render() {
+      // Smart Component: I have a function, but something isn't working? I also need to pass that function to the ChildComponent.
     return (
-      <div>Smart Component: I have a function, but something isn't working? I also need to pass that function to the ChildComponent.
+      <div>
         <div>
           <input onChange={this.handleInput} type="text" placeholder="Say It, Don't Spray It!" />
         </div>
         <div>
-          <ChildComponent onClick={"FILL_ME_IN"}/>
-          <DisplayComponent sayWhat={"FILL_ME_IN"} />
+          <ChildComponent onClick={this.handleSubmit}/>
+          <DisplayComponent sayWhat={this.state.whatWasSaid} />
         </div>
       </div>
     );
@@ -71,8 +80,9 @@ class ParentComponent extends Component {
 
 class ChildComponent extends Component {
   render() {
+    // Dumb Component receiving Props
     return (
-      <div>Dumb Component receiving Props
+      <div>
         <div>
           <input type="submit" onClick={this.props.onClick}/>
         </div>
@@ -93,10 +103,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BaseLayout></BaseLayout>
-        <Header />
-        <ParentComponent />
-        <Footer />
+        <BaseLayout>
+          <ParentComponent />
+        </BaseLayout>
       </div>
     );
   }
