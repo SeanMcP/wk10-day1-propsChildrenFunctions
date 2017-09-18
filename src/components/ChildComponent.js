@@ -5,8 +5,8 @@ export default class ChildComponent extends Component {
     // Dumb Component receiving Props
     return (
       <div>
-        <div>
-          <input type="submit" onClick={this.props.onClick}/>
+        <div className="form-group">
+          <input className="btn btn-primary mt-2" type="submit" onClick={this.props.onClick}/>
         </div>
       </div>
     );

@@ -37,9 +37,11 @@ export default class ParentComponent extends Component {
   render() {
       // Smart Component: I have a function, but something isn't working? I also need to pass that function to the ChildComponent.
     return (
-      <div>
-        <div>
-          <input onChange={this.handleInput} type="text" placeholder="Say It, Don't Spray It!" />
+      <div className="col-3 mx-auto">
+        <div className="form-group text-left">
+          <label for="sayWhat">What do you have to say?</label>
+          <input className="form-control" id="sayWhat" aria-describedby="sayWhatHelp" onChange={this.handleInput} type="text" placeholder="Say It, Don't Spray It!" />
+          <small id="sayWhatHelp" className="form-text text-muted">We want to hear from you</small>
         </div>
         <div>
           <ChildComponent onClick={this.handleSubmit}/>
